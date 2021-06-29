@@ -3,10 +3,10 @@ replicaCount: 1
 namespace: default
 
 container:
-  name: cart-ui
+  name: wishlist-ui
   
 image:
-  repository: deekshithsn/cart
+  repository: deekshithsn/wishlist
   pullPolicy: IfNotPresent
   
 strategy:
@@ -17,8 +17,7 @@ strategy:
 
 service:
   type: ClusterIP
-  port: 1004
-  targetport: 1004
-  name: cart
+  port: 1003
+  targetport: 5000
+  name: wishlist
   portname: http
-

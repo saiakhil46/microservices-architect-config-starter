@@ -3,10 +3,10 @@ replicaCount: 1
 namespace: default
 
 container:
-  name: cart-ui
+  name: shoe-ui
   
 image:
-  repository: deekshithsn/cart
+  repository: deekshithsn/shoe
   pullPolicy: IfNotPresent
   
 strategy:
@@ -17,8 +17,8 @@ strategy:
 
 service:
   type: ClusterIP
-  port: 1004
-  targetport: 1004
-  name: cart
+  port: 1002
+  targetport: 1002
+  name: shoe
   portname: http
 

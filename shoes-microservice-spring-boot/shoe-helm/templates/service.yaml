@@ -4,10 +4,10 @@ metadata:
   name: {{ .Values.service.name }}
   namespace: {{ .Values.namespace }}
   labels:
-    {{- include "cart-helm.labels" . | nindent 4 }}
+    {{- include "shoe-helm.labels" . | nindent 4 }}
 spec:
   selector:
-    {{- include "cart-helm.selectorLabels" . | nindent 4 }}
+    {{- include "shoe-helm.selectorLabels" . | nindent 4  }}
   type: {{ .Values.service.type }}
   ports:
   - name: {{ .Values.service.portname }}

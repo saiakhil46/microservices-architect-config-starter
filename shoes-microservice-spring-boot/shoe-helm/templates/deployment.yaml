@@ -4,11 +4,11 @@ metadata:
   name:  {{ .Release.Name }}
   namespace: {{ .Values.namespace }}
   labels:
-    {{- include "cart-helm.labels" . | nindent 4 }}
+    {{- include "shoe-helm.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      {{- include "cart-helm.selectorLabels" . | nindent 6 }}
+      {{- include "shoe-helm.selectorLabels" . | nindent 6 }}
   replicas: {{ .Values.replicaCount }}
   {{- with .Values.strategy }}
   strategy:
@@ -17,12 +17,12 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "cart-helm.selectorLabels" . | nindent 8 }}
+        {{- include "shoe-helm.selectorLabels" . | nindent 8 }}
     spec:
       containers:
-      - name:  {{ .Values.container.name }}
-        image:  {{ .Values.image.repository }}
+      - name:  {{ .Release.Name }}
+        image: {{ .Values.image.repository }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
-        - containerPort: {{ .Values.service.targetport }}
-          name: {{ .Values.service.portname }}
+        - containerPort:  {{ .Values.service.targetport }}
+          name:  {{ .Values.service.name }}

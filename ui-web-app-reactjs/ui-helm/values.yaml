@@ -3,10 +3,10 @@ replicaCount: 1
 namespace: default
 
 container:
-  name: cart-ui
+  name: ui
   
 image:
-  repository: deekshithsn/cart
+  repository: deekshithsn/ui
   pullPolicy: IfNotPresent
   
 strategy:
@@ -16,9 +16,9 @@ strategy:
   type: RollingUpdate
 
 service:
-  type: ClusterIP
-  port: 1004
-  targetport: 1004
-  name: cart
+  type: NodePort
+  port: 8080
+  targetport: 8080
+  name: ui
   portname: http
 
