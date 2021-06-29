@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  shoes-ui
+  namespace: default
+  labels:
+    app:  shoes-ui
+spec:
+  selector:
+    matchLabels:
+      app: shoes-ui
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  shoes-ui
+    spec:
+      containers:
+      - name:  shoes-ui
+        image:  deekshithsn/shoe
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort:  1002
+          name:  shoes-ui
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: shoe
+  namespace: default
+spec:
+  selector:
+    app: shoes-ui
+  type: ClusterIP
+  ports:
+  - name: shoes-ui
+    port: 1002
+    targetPort: 1002

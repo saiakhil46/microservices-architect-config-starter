@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  wishlist-ui
+  namespace: default
+  labels:
+    app:  wishlist-ui
+spec:
+  selector:
+    matchLabels:
+      app: wishlist-ui
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  wishlist-ui
+    spec:
+      containers:
+      - name:  wishlist-ui
+        image:  deekshithsn/wishlist
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort:  5000
+          name:  wishlist-ui
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: wishlist
+  namespace: default
+spec:
+  selector:
+    app: wishlist-ui
+  type: ClusterIP
+  ports:
+  - name: wishlist-ui
+    port: 1003
+    targetPort: 5000 
